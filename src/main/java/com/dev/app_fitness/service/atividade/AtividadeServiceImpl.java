@@ -1,5 +1,8 @@
 package com.dev.app_fitness.service.atividade;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.dev.app_fitness.dto.AtividadeDTO;
@@ -24,5 +27,11 @@ public class AtividadeServiceImpl implements AtividadeService{
         atividade.setCaloriasQueimadas(dto.getCaloriasQueimadas());
 
         return atividadeRepository.save(atividade).obterAtividadeDTO();
+    }
+
+    public List<AtividadeDTO> obterAtividades(){
+        List<Atividade> atividades = atividadeRepository.findAll();
+
+        return atividades.stream().map(Atividade::obterAtividadeDTO).collect(Collectors.toList());
     }
 }

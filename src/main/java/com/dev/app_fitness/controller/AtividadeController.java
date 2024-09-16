@@ -1,8 +1,10 @@
 package com.dev.app_fitness.controller;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,16 @@ public class AtividadeController {
             return ResponseEntity.status(HttpStatus.CREATED).body(criarAtividade);
         }else{
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar atividade!"); 
+        }
+    }
+
+    @GetMapping("/obterAtividades")
+    public ResponseEntity<?> obterAtividades(){
+
+        try {
+            return ResponseEntity.ok(atividadeService.obterAtividades());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao obter atividades!"); 
         }
     }
 }
