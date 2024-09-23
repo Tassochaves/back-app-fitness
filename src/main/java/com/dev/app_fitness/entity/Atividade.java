@@ -27,6 +27,7 @@ public class Atividade {
     private int caloriasQueimadas;
 
 
+    //Converte Atividade para AtividadeDTO
     public AtividadeDTO obterAtividadeDTO(){
 
         AtividadeDTO atividadeDTO = new AtividadeDTO();
