@@ -1,5 +1,8 @@
 package com.dev.app_fitness.service.treino;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.dev.app_fitness.dto.TreinoDTO;
@@ -24,5 +27,12 @@ public class TreinoServiceImpl implements TreinoService{
         treino.setData(treinoDTO.getData());
 
         return treinoRepository.save(treino).obterTreinoDTO();
+    }
+
+    public List<TreinoDTO> listarTreinos(){
+        
+        List<Treino> treinos = treinoRepository.findAll();
+
+        return treinos.stream().map(Treino::obterTreinoDTO).collect(Collectors.toList());
     }
 }
