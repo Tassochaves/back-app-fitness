@@ -8,4 +8,6 @@ public interface MetaService {
     MetaDTO postarMeta(MetaDTO metaDTO);
 
     List<MetaDTO> listarMetas();
+
+    MetaDTO atualizaStatus(Long id);
 }

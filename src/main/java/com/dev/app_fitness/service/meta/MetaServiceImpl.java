@@ -1,6 +1,7 @@
 package com.dev.app_fitness.service.meta;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import com.dev.app_fitness.dto.MetaDTO;
 import com.dev.app_fitness.entity.Meta;
 import com.dev.app_fitness.repository.MetaRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -32,4 +34,18 @@ public class MetaServiceImpl implements MetaService{
 
         return metas.stream().map(Meta::obterMetaDTO).collect(Collectors.toList());
     }
+
+    public MetaDTO atualizaStatus(Long id){
+        Optional<Meta> optionalMeta = metaRepository.findById(id);
+
+        if(optionalMeta.isPresent()){
+            Meta metaExistente = optionalMeta.get();
+
+            metaExistente.setAlcancada(true);
+            return metaRepository.save(metaExistente).obterMetaDTO();
+        }
+
+        throw new EntityNotFoundException("Meta nao encontrada!");
+    }
+
 }
